@@ -7,20 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace OneConnect
 {
     public partial class Form1 : Form
     {
+
+        private static SqlKeyWords words = new SqlKeyWords();
+        private List<string> keywords = words.reservedWords;
         public Form1()
         {
             InitializeComponent();
             
         }
-
-        private static SqlKeyWords words = new SqlKeyWords();
-        private List<string> keywords = words.reservedWords;
-
+        
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
 
@@ -39,9 +40,32 @@ namespace OneConnect
             Console.WriteLine(keywords);
         }
 
-        private void btn_openDb_Click(object sender, EventArgs e)
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void sqlLiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string filepath = "";
+
+            OpenFileDialog folderBrowserDialog = new OpenFileDialog();
+            if(folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                filepath = folderBrowserDialog.FileName;
+            }
+
+            SqLiteDb sqLiteDbConn = new SqLiteDb(filepath);
+            //sqLiteDbConn.connectionString = filepath;
+            bool pass = sqLiteDbConn.openDb();
+            txt_schema.Text = string.Format("*** Connection *** {0}", pass);
+            DataTable sqliteTable = sqLiteDbConn.getTableData();
+
+            // Returns all column names of the table
+            foreach (DataRow row in sqliteTable.Rows)
+            {
+                Console.WriteLine((string)row[2]);
+            }
         }
     }
 }
