@@ -10,55 +10,77 @@ namespace OneConnect
 {
     class SqLiteDb
     {
-        
+        private Dictionary<string, List<string>> databaseSchema = new Dictionary<string, List<string>>();
         private string path = "";
         private static SQLiteConnection connection;
         private static bool connectionOpen = false;
-
         public SqLiteDb(string sqliteLocation)
         {
             connectionString = sqliteLocation;
-            connection = new SQLiteConnection();
-            
-        }
-    
-        public string connectionString
-        {
-            set { path = string.Format("Data Source={0}", value); }
-            get { return path; }
+            connection = new SQLiteConnection(connectionString);
         }
 
-        public void getSchema()
+        public string connectionString
         {
-            if (connectionOpen)
+            set
             {
-                var metaData = connection.GetSchema();
-                foreach (var item in metaData.Rows)
-                {
-                    
-                }
-                
+                path = string.Format("Data Source={0}", value);
+            }
+
+            get
+            {
+                return path;
             }
         }
+
+        public bool isConnectionOpen
+        {
+            get
+            {
+                return connectionOpen;
+            }
+        }
+
+        public string dbName
+        {
+            get
+            {
+                return connection.DataSource;
+            }
+        }
+
         public bool openDb()
         {
             try
             {
                 connection.Open();
-
-            } catch(SQLiteException ex)
+            }
+            catch (SQLiteException ex)
             {
                 Console.WriteLine(ex.Message);
                 return connectionOpen = false;
             }
+
             connectionOpen = true;
             return connectionOpen;
         }
 
-        public bool isConnectionOpen
+        public bool executeCommand(string commandString)
         {
-            get { return connectionOpen; }
+
+            SQLiteCommand cmd = new SQLiteCommand(commandString, connection);
+            SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
+            SQLiteDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Console.WriteLine(reader);
+            }
+
+
+
+            return true;
         }
+
 
         public void closeDB()
         {
@@ -68,27 +90,20 @@ namespace OneConnect
             }
         }
 
-        public DataTable getTableData()
+        public Dictionary<string, List<string>> getTableData()
         {
             DataTable tables = null;
             if (connectionOpen)
             {
                 tables = connection.GetSchema("Tables");
+                foreach (DataRow name in tables.Rows)
+                {
+                    ParseSchema ps = new ParseSchema();
+                    ps.parseSchema((string)name[6]);
+                    databaseSchema.Add((string)name[2], ps.getSchema);
+                }
             }
-            else
-            {
-                
-            }
-
-            return tables;
+            return databaseSchema;
         }
-        
     }
 }
-
-/*
- https://archive.codeplex.com/?p=dbschemareader
-
-     https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlconnection.getschema?view=netframework-4.7.2
-     
-     */
