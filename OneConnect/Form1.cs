@@ -38,27 +38,35 @@ namespace OneConnect
             SqLiteDb sqLiteDbConn = new SqLiteDb(_filepath);
             sqLiteDbConn.openDb();
             var reader = sqLiteDbConn.executeCommand(dbCommand);
-            fillListView(reader);
+            fillGridView(reader);
             sqLiteDbConn.closeDB();
         }
 
-        private void fillListView(IDataReader reader)
+        private void fillGridView(IDataReader reader)
         {
-            int count = reader.FieldCount;
-            //Get field Name
-            for (int i = 0; i < count; i++)
-            {
-                Console.WriteLine(reader.GetName(i));
-            }
 
-            //Get column data
-            while (reader.Read())
-            {
-                for (int i = 0; i < count; i++)
-                {
-                    Console.WriteLine(reader.GetValue(i));
-                }
-            }
+            BindingSource bs = new BindingSource();
+            bs.DataSource = reader;
+
+            dataGridView1.DataSource = bs;
+            
+
+            //int count = reader.FieldCount;
+            ////Get field Name
+            //for (int i = 0; i < count; i++)
+            //{
+            //    Console.WriteLine(reader.GetName(i));
+                
+            //}
+
+            ////Get column data
+            //while (reader.Read())
+            //{
+            //    for (int i = 0; i < count; i++)
+            //    {
+            //        Console.WriteLine(reader.GetValue(i));
+            //    }
+            //}
             
         }
 
