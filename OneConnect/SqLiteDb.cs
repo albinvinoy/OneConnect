@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Data;
+using System.Data.Common;
 
 namespace OneConnect
 {
@@ -45,7 +46,7 @@ namespace OneConnect
         {
             get
             {
-                return connection.DataSource;
+                return connection.Database;
             }
         }
 
@@ -55,7 +56,7 @@ namespace OneConnect
             {
                 connection.Open();
             }
-            catch (SQLiteException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return connectionOpen = false;
@@ -65,22 +66,23 @@ namespace OneConnect
             return connectionOpen;
         }
 
-        public bool executeCommand(string commandString)
+        public IDataReader executeCommand(string commandString)
         {
 
-            SQLiteCommand cmd = new SQLiteCommand(commandString, connection);
-            SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
-            SQLiteDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                Console.WriteLine(reader);
-            }
-
-
-
-            return true;
+            IDbCommand cmd = new SQLiteCommand(commandString, connection);
+            IDataAdapter da = new SQLiteDataAdapter((SQLiteCommand)cmd);
+            IDataReader reader = cmd.ExecuteReader();
+            return reader;
         }
 
+        public SQLiteDataReader getReader
+        {
+
+            get
+            {
+                return getReader;
+            }
+        }
 
         public void closeDB()
         {

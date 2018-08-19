@@ -37,16 +37,35 @@ namespace OneConnect
 
             SqLiteDb sqLiteDbConn = new SqLiteDb(_filepath);
             sqLiteDbConn.openDb();
-            sqLiteDbConn.executeCommand(dbCommand);
-
+            var reader = sqLiteDbConn.executeCommand(dbCommand);
+            fillListView(reader);
             sqLiteDbConn.closeDB();
+        }
+
+        private void fillListView(IDataReader reader)
+        {
+            int count = reader.FieldCount;
+            //Get field Name
+            for (int i = 0; i < count; i++)
+            {
+                Console.WriteLine(reader.GetName(i));
+            }
+
+            //Get column data
+            while (reader.Read())
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    Console.WriteLine(reader.GetValue(i));
+                }
+            }
+            
         }
 
         private void txt_schema_KeyUp(object sender, KeyEventArgs e)
         {
             // check for key up and hilight the text
-            
-            //Console.WriteLine(keywords);
+            // Console.WriteLine(keywords);
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -89,5 +108,7 @@ namespace OneConnect
             }
             return _filepath;
         }
+
+
     }
 }
