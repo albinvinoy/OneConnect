@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_schema = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Run = new System.Windows.Forms.Button();
@@ -42,6 +42,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.lbl_databaseName = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btn_getSchema = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.menuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -51,7 +52,7 @@
             // 
             this.txt_schema.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_schema.Location = new System.Drawing.Point(37, 578);
-            this.txt_schema.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_schema.Margin = new System.Windows.Forms.Padding(2);
             this.txt_schema.Multiline = true;
             this.txt_schema.Name = "txt_schema";
             this.txt_schema.Size = new System.Drawing.Size(657, 218);
@@ -72,7 +73,7 @@
             // btn_Run
             // 
             this.btn_Run.Location = new System.Drawing.Point(37, 808);
-            this.btn_Run.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_Run.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Run.Name = "btn_Run";
             this.btn_Run.Size = new System.Drawing.Size(56, 35);
             this.btn_Run.TabIndex = 6;
@@ -106,7 +107,7 @@
             // sqlLiteToolStripMenuItem
             // 
             this.sqlLiteToolStripMenuItem.Name = "sqlLiteToolStripMenuItem";
-            this.sqlLiteToolStripMenuItem.Size = new System.Drawing.Size(153, 30);
+            this.sqlLiteToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
             this.sqlLiteToolStripMenuItem.Text = "Sql Lite";
             this.sqlLiteToolStripMenuItem.Click += new System.EventHandler(this.sqlLiteToolStripMenuItem_Click);
             // 
@@ -114,7 +115,7 @@
             // 
             this.mySqlToolStripMenuItem.Name = "mySqlToolStripMenuItem";
             this.mySqlToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
-            this.mySqlToolStripMenuItem.Text = "My Sql";
+            this.mySqlToolStripMenuItem.Text = "SQL";
             this.mySqlToolStripMenuItem.Click += new System.EventHandler(this.mySqlToolStripMenuItem_Click);
             // 
             // createDatabaseToolStripMenuItem
@@ -159,11 +160,11 @@
             // 
             // dataGridView1
             // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Red;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Red;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
@@ -171,18 +172,30 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.GridColor = System.Drawing.Color.SteelBlue;
             this.dataGridView1.Location = new System.Drawing.Point(37, 78);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 40;
             this.dataGridView1.Size = new System.Drawing.Size(1016, 450);
             this.dataGridView1.TabIndex = 10;
             // 
+            // btn_getSchema
+            // 
+            this.btn_getSchema.Location = new System.Drawing.Point(103, 808);
+            this.btn_getSchema.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_getSchema.Name = "btn_getSchema";
+            this.btn_getSchema.Size = new System.Drawing.Size(119, 35);
+            this.btn_getSchema.TabIndex = 11;
+            this.btn_getSchema.Text = "Get Schema";
+            this.btn_getSchema.UseVisualStyleBackColor = true;
+            this.btn_getSchema.Click += new System.EventHandler(this.btn_getSchema_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1793, 1254);
+            this.Controls.Add(this.btn_getSchema);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.lbl_databaseName);
             this.Controls.Add(this.lbl_Error);
@@ -192,7 +205,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.menuStrip2);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(1564, 1131);
             this.Name = "Form1";
             this.Text = "Main";
@@ -220,6 +233,7 @@
         private System.Windows.Forms.ToolStripMenuItem createDatabaseToolStripMenuItem;
         private System.Windows.Forms.Label lbl_databaseName;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btn_getSchema;
     }
 }
 

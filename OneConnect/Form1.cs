@@ -13,6 +13,8 @@ namespace OneConnect
 {
     public partial class Form1 : Form
     {
+        private enum DatabaseType {Sqlite, SQL };
+        private DatabaseType currentDatabaseType;
         private string _filepath = "";
         private static SqlKeyWords words = new SqlKeyWords();
         private List<string> keywords = words.reservedWords;
@@ -64,6 +66,7 @@ namespace OneConnect
 
         private void sqlLiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            currentDatabaseType = DatabaseType.Sqlite;
             if (_filepath == string.Empty)
             {
                 _filepath = chooseFile();
@@ -105,7 +108,43 @@ namespace OneConnect
 
         private void mySqlToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            currentDatabaseType = DatabaseType.SQL;
+            Sql sqlDbConn = new Sql(@"DESKTOP-2QVKASI\SQL2012", "AdventureWorksDW2012EE", "sa", "123");
+            try
+            {
+                //sqLiteDbConn.connectionString = filepath;
+                bool pass = sqlDbConn.openDb();
+                //lbl_Error.Text = string.Format("*** Connection *** {0}", pass);
+                lbl_databaseName.Text = string.Format("Connected to {0} - {1}", sqlDbConn.dbName, "SQL Database");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            sqlDbConn.closeDB();
+        }
 
+        private void btn_getSchema_Click(object sender, EventArgs e)
+        {
+            if (DatabaseType.Sqlite == currentDatabaseType)
+            {
+                if (_filepath == string.Empty)
+                {
+                    _filepath = chooseFile();
+                }
+                SqLiteDb sqLiteDbConn = new SqLiteDb(_filepath);
+                sqLiteDbConn.openDb();
+                var tableData = sqLiteDbConn.getTableData();
+                sqLiteDbConn.closeDB();
+            }
+            else if(DatabaseType.SQL == currentDatabaseType)
+            {
+                Sql sqlDbConn = new Sql(@"DESKTOP-2QVKASI\SQL2012", "AdventureWorksDW2012EE", "sa", "123");
+                sqlDbConn.openDb();
+                var tableData = sqlDbConn.getTableData();
+                sqlDbConn.closeDB();
+
+            }
         }
     }
 }
