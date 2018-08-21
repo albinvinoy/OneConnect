@@ -107,5 +107,35 @@ namespace OneConnect
             }
             return databaseSchema;
         }
+        private void createDbHelper(string location, string name)
+        {
+            
+        }
+
+        public bool createDb(string location, string name)
+        {
+            createDbHelper(location + name);
+            return false;
+        }
+
+        private void createDbHelper(string v)
+        {
+            SQLiteConnection.CreateFile(v);
+
+            /*
+             string sql = "create table highscores (name varchar(20), score int)";
+
+SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
+command.ExecuteNonQuery();
+
+sql = "insert into highscores (name, score) values ('Me', 9001)";
+
+command = new SQLiteCommand(sql, m_dbConnection);
+command.ExecuteNonQuery();
+
+m_dbConnection.Close();
+
+             */
+        }
     }
 }

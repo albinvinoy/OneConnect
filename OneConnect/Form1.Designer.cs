@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_schema = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Run = new System.Windows.Forms.Button();
@@ -43,6 +43,8 @@
             this.lbl_databaseName = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btn_getSchema = new System.Windows.Forms.Button();
+            this.sqliteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.menuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -121,6 +123,9 @@
             // createDatabaseToolStripMenuItem
             // 
             this.createDatabaseToolStripMenuItem.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.createDatabaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sqliteToolStripMenuItem,
+            this.sQLToolStripMenuItem});
             this.createDatabaseToolStripMenuItem.Name = "createDatabaseToolStripMenuItem";
             this.createDatabaseToolStripMenuItem.Size = new System.Drawing.Size(153, 29);
             this.createDatabaseToolStripMenuItem.Text = "Create Database";
@@ -160,11 +165,11 @@
             // 
             // dataGridView1
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Red;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Red;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
@@ -189,6 +194,20 @@
             this.btn_getSchema.Text = "Get Schema";
             this.btn_getSchema.UseVisualStyleBackColor = true;
             this.btn_getSchema.Click += new System.EventHandler(this.btn_getSchema_Click);
+            // 
+            // sqliteToolStripMenuItem
+            // 
+            this.sqliteToolStripMenuItem.Name = "sqliteToolStripMenuItem";
+            this.sqliteToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.sqliteToolStripMenuItem.Text = "Sqlite";
+            this.sqliteToolStripMenuItem.Click += new System.EventHandler(this.sqliteToolStripMenuItem_Click);
+            // 
+            // sQLToolStripMenuItem
+            // 
+            this.sQLToolStripMenuItem.Name = "sQLToolStripMenuItem";
+            this.sQLToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.sQLToolStripMenuItem.Text = "SQL";
+            this.sQLToolStripMenuItem.Click += new System.EventHandler(this.sQLToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -234,6 +253,8 @@
         private System.Windows.Forms.Label lbl_databaseName;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btn_getSchema;
+        private System.Windows.Forms.ToolStripMenuItem sqliteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sQLToolStripMenuItem;
     }
 }
 

@@ -99,5 +99,16 @@ namespace OneConnect
             return databaseSchema;
         }
 
+        public bool createDb(string connectionString)
+        {
+            createDbHelper(connectionString);
+
+            return false;
+        }
+
+        private void createDbHelper(string connectionString)
+        {
+            
+        }
     }
 }

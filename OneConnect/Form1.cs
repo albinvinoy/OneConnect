@@ -146,5 +146,24 @@ namespace OneConnect
 
             }
         }
+
+        private void sqliteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            currentDatabaseType = DatabaseType.Sqlite;
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            if(folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                _filepath = folderBrowserDialog.SelectedPath + "test.db";
+            }
+
+            SqLiteDb sqLiteDb = new SqLiteDb(_filepath);
+            sqLiteDb.openDb();
+            sqLiteDb.closeDB();
+        }
+
+        private void sQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //https://support.microsoft.com/en-us/help/307283/how-to-create-a-sql-server-database-programmatically-by-using-ado-net
+        }
     }
 }
