@@ -153,17 +153,21 @@ namespace OneConnect
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             if(folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-                _filepath = folderBrowserDialog.SelectedPath + "test.db";
+                _filepath = folderBrowserDialog.SelectedPath ;
             }
-
-            SqLiteDb sqLiteDb = new SqLiteDb(_filepath);
-            sqLiteDb.openDb();
-            sqLiteDb.closeDB();
+            
+            SqLiteDb sq = new SqLiteDb(_filepath+ "\\test.db");
+            sq.createDb(_filepath + "\\test.db");
+            sq.openDb();
+            
+            Console.WriteLine(sq.connectionString);
+            Console.WriteLine(sq.isConnectionOpen);
+            sq.closeDB();
         }
 
         private void sQLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //https://support.microsoft.com/en-us/help/307283/how-to-create-a-sql-server-database-programmatically-by-using-ado-net
+            // https://support.microsoft.com/en-us/help/307283/how-to-create-a-sql-server-database-programmatically-by-using-ado-net
         }
     }
 }

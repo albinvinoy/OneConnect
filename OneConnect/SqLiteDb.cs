@@ -107,14 +107,10 @@ namespace OneConnect
             }
             return databaseSchema;
         }
-        private void createDbHelper(string location, string name)
-        {
-            
-        }
 
-        public bool createDb(string location, string name)
+        public bool createDb(string path)
         {
-            createDbHelper(location + name);
+            createDbHelper(path);
             return false;
         }
 
