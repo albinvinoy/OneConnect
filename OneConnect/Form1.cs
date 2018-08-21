@@ -48,26 +48,7 @@ namespace OneConnect
             BindingSource bs = new BindingSource();
             bs.DataSource = reader;
 
-            dataGridView1.DataSource = bs;
-            
-
-            //int count = reader.FieldCount;
-            ////Get field Name
-            //for (int i = 0; i < count; i++)
-            //{
-            //    Console.WriteLine(reader.GetName(i));
-                
-            //}
-
-            ////Get column data
-            //while (reader.Read())
-            //{
-            //    for (int i = 0; i < count; i++)
-            //    {
-            //        Console.WriteLine(reader.GetValue(i));
-            //    }
-            //}
-            
+            dataGridView1.DataSource = bs;            
         }
 
         private void txt_schema_KeyUp(object sender, KeyEventArgs e)
@@ -117,6 +98,14 @@ namespace OneConnect
             return _filepath;
         }
 
+        private void createDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void mySqlToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

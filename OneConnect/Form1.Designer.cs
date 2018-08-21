@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_schema = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Run = new System.Windows.Forms.Button();
@@ -50,11 +50,11 @@
             // txt_schema
             // 
             this.txt_schema.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_schema.Location = new System.Drawing.Point(65, 896);
-            this.txt_schema.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txt_schema.Location = new System.Drawing.Point(37, 578);
+            this.txt_schema.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txt_schema.Multiline = true;
             this.txt_schema.Name = "txt_schema";
-            this.txt_schema.Size = new System.Drawing.Size(1165, 336);
+            this.txt_schema.Size = new System.Drawing.Size(657, 218);
             this.txt_schema.TabIndex = 0;
             this.txt_schema.TextChanged += new System.EventHandler(this.txt_schema_TextChanged);
             this.txt_schema.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_schema_KeyUp);
@@ -62,19 +62,19 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(60, 838);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(34, 541);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(221, 32);
+            this.label1.Size = new System.Drawing.Size(125, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "Database Query";
             // 
             // btn_Run
             // 
-            this.btn_Run.Location = new System.Drawing.Point(65, 1252);
-            this.btn_Run.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btn_Run.Location = new System.Drawing.Point(37, 808);
+            this.btn_Run.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_Run.Name = "btn_Run";
-            this.btn_Run.Size = new System.Drawing.Size(100, 54);
+            this.btn_Run.Size = new System.Drawing.Size(56, 35);
             this.btn_Run.TabIndex = 6;
             this.btn_Run.Text = "Run";
             this.btn_Run.UseVisualStyleBackColor = true;
@@ -83,10 +83,9 @@
             // lbl_Error
             // 
             this.lbl_Error.AutoSize = true;
-            this.lbl_Error.Location = new System.Drawing.Point(60, 1412);
-            this.lbl_Error.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbl_Error.Location = new System.Drawing.Point(34, 911);
             this.lbl_Error.Name = "lbl_Error";
-            this.lbl_Error.Size = new System.Drawing.Size(0, 32);
+            this.lbl_Error.Size = new System.Drawing.Size(0, 20);
             this.lbl_Error.TabIndex = 7;
             // 
             // fileSystemWatcher1
@@ -101,28 +100,30 @@
             this.sqlLiteToolStripMenuItem,
             this.mySqlToolStripMenuItem});
             this.openDatabaseToolStripMenuItem.Name = "openDatabaseToolStripMenuItem";
-            this.openDatabaseToolStripMenuItem.Size = new System.Drawing.Size(235, 45);
+            this.openDatabaseToolStripMenuItem.Size = new System.Drawing.Size(147, 29);
             this.openDatabaseToolStripMenuItem.Text = "Open Database";
             // 
             // sqlLiteToolStripMenuItem
             // 
             this.sqlLiteToolStripMenuItem.Name = "sqlLiteToolStripMenuItem";
-            this.sqlLiteToolStripMenuItem.Size = new System.Drawing.Size(326, 46);
+            this.sqlLiteToolStripMenuItem.Size = new System.Drawing.Size(153, 30);
             this.sqlLiteToolStripMenuItem.Text = "Sql Lite";
             this.sqlLiteToolStripMenuItem.Click += new System.EventHandler(this.sqlLiteToolStripMenuItem_Click);
             // 
             // mySqlToolStripMenuItem
             // 
             this.mySqlToolStripMenuItem.Name = "mySqlToolStripMenuItem";
-            this.mySqlToolStripMenuItem.Size = new System.Drawing.Size(326, 46);
+            this.mySqlToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
             this.mySqlToolStripMenuItem.Text = "My Sql";
+            this.mySqlToolStripMenuItem.Click += new System.EventHandler(this.mySqlToolStripMenuItem_Click);
             // 
             // createDatabaseToolStripMenuItem
             // 
             this.createDatabaseToolStripMenuItem.BackColor = System.Drawing.Color.MediumTurquoise;
             this.createDatabaseToolStripMenuItem.Name = "createDatabaseToolStripMenuItem";
-            this.createDatabaseToolStripMenuItem.Size = new System.Drawing.Size(247, 45);
+            this.createDatabaseToolStripMenuItem.Size = new System.Drawing.Size(153, 29);
             this.createDatabaseToolStripMenuItem.Text = "Create Database";
+            this.createDatabaseToolStripMenuItem.Click += new System.EventHandler(this.createDatabaseToolStripMenuItem_Click);
             // 
             // menuStrip2
             // 
@@ -132,55 +133,56 @@
             this.createDatabaseToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Padding = new System.Windows.Forms.Padding(11, 3, 0, 3);
-            this.menuStrip2.Size = new System.Drawing.Size(3187, 51);
+            this.menuStrip2.Size = new System.Drawing.Size(1793, 33);
             this.menuStrip2.TabIndex = 8;
             this.menuStrip2.Text = "menuStrip2";
             // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
-            this.menuStrip1.Location = new System.Drawing.Point(0, 51);
+            this.menuStrip1.Location = new System.Drawing.Point(0, 33);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(3187, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(1793, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // lbl_databaseName
             // 
             this.lbl_databaseName.AutoSize = true;
-            this.lbl_databaseName.Location = new System.Drawing.Point(60, 75);
+            this.lbl_databaseName.Location = new System.Drawing.Point(34, 48);
+            this.lbl_databaseName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_databaseName.Name = "lbl_databaseName";
-            this.lbl_databaseName.Size = new System.Drawing.Size(0, 32);
+            this.lbl_databaseName.Size = new System.Drawing.Size(0, 20);
             this.lbl_databaseName.TabIndex = 9;
             this.lbl_databaseName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // dataGridView1
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Red;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Red;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.GridColor = System.Drawing.Color.SteelBlue;
-            this.dataGridView1.Location = new System.Drawing.Point(66, 121);
+            this.dataGridView1.Location = new System.Drawing.Point(37, 78);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 40;
-            this.dataGridView1.Size = new System.Drawing.Size(1807, 698);
+            this.dataGridView1.Size = new System.Drawing.Size(1016, 450);
             this.dataGridView1.TabIndex = 10;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(3187, 1943);
+            this.ClientSize = new System.Drawing.Size(1793, 1254);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.lbl_databaseName);
             this.Controls.Add(this.lbl_Error);
@@ -190,8 +192,8 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.menuStrip2);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.MinimumSize = new System.Drawing.Size(2764, 1723);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MinimumSize = new System.Drawing.Size(1564, 1131);
             this.Name = "Form1";
             this.Text = "Main";
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
