@@ -34,3 +34,4 @@ namespace OneConnect
 
     }
 }
+//create table highscores(name varchar(20), score int)
