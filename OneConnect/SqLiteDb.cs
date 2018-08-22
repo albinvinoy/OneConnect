@@ -71,8 +71,18 @@ namespace OneConnect
 
             IDbCommand cmd = new SQLiteCommand(commandString, connection);
             IDataAdapter da = new SQLiteDataAdapter((SQLiteCommand)cmd);
+
+            checkCommandType(commandString);
+
             IDataReader reader = cmd.ExecuteReader();
+
+
             return reader;
+        }
+
+        private void checkCommandType(string commandString)
+        {
+            throw new NotImplementedException();
         }
 
         public SQLiteDataReader getReader
