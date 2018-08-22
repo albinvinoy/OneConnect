@@ -66,11 +66,12 @@ namespace OneConnect
 
         private void sqlLiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //on load for selecting sqlite
             currentDatabaseType = DatabaseType.Sqlite;
-            if (_filepath == string.Empty)
-            {
-                _filepath = chooseFile();
-            }
+            //if (_filepath == string.Empty)
+            //{
+            _filepath = chooseFile();
+            //}
             SqLiteDb sqLiteDbConn = new SqLiteDb(_filepath);
             try
             {
@@ -78,6 +79,9 @@ namespace OneConnect
                 bool pass = sqLiteDbConn.openDb();
                 //lbl_Error.Text = string.Format("*** Connection *** {0}", pass);
                 lbl_databaseName.Text = string.Format("Connected to {0} - {1}", sqLiteDbConn.dbName, "SQLite Database");
+
+                List<string> tableData = sqLiteDbConn.getTableNames();
+                cmb_tableName.DataSource = tableData;
             }
             catch (Exception ex)
             {
@@ -169,5 +173,27 @@ namespace OneConnect
         {
             // https://support.microsoft.com/en-us/help/307283/how-to-create-a-sql-server-database-programmatically-by-using-ado-net
         }
+
+        private void fillSchema(string tableName)
+        {
+            string selectProcedure = string.Format("select * from {0};", tableName);
+            if (_filepath == string.Empty)
+            {
+                _filepath = chooseFile();
+            }
+
+            SqLiteDb sqLiteDbConn = new SqLiteDb(_filepath);
+            sqLiteDbConn.openDb();
+            var reader = sqLiteDbConn.executeCommand(selectProcedure);
+            fillGridView(reader);
+            sqLiteDbConn.closeDB();
+        }
+
+        private void cmb_tableName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string tableName = (string)cmb_tableName.SelectedValue;
+            fillSchema(tableName);
+        }
+
     }
 }

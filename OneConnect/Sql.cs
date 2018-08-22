@@ -68,7 +68,6 @@ namespace OneConnect
 
         public IDataReader executeCommand(string commandString)
         {
-
             IDbCommand cmd = new SqlCommand(commandString, connection);
             IDataAdapter da = new SqlDataAdapter((SqlCommand)cmd);
             IDataReader reader = cmd.ExecuteReader();

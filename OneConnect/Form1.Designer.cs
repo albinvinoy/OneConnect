@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_schema = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Run = new System.Windows.Forms.Button();
@@ -38,13 +38,14 @@
             this.sqlLiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mySqlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sqliteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.lbl_databaseName = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btn_getSchema = new System.Windows.Forms.Button();
-            this.sqliteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmb_tableName = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.menuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -53,7 +54,7 @@
             // txt_schema
             // 
             this.txt_schema.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_schema.Location = new System.Drawing.Point(37, 578);
+            this.txt_schema.Location = new System.Drawing.Point(27, 649);
             this.txt_schema.Margin = new System.Windows.Forms.Padding(2);
             this.txt_schema.Multiline = true;
             this.txt_schema.Name = "txt_schema";
@@ -65,7 +66,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 541);
+            this.label1.Location = new System.Drawing.Point(24, 612);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(125, 20);
@@ -74,7 +75,7 @@
             // 
             // btn_Run
             // 
-            this.btn_Run.Location = new System.Drawing.Point(37, 808);
+            this.btn_Run.Location = new System.Drawing.Point(27, 879);
             this.btn_Run.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Run.Name = "btn_Run";
             this.btn_Run.Size = new System.Drawing.Size(56, 35);
@@ -109,14 +110,14 @@
             // sqlLiteToolStripMenuItem
             // 
             this.sqlLiteToolStripMenuItem.Name = "sqlLiteToolStripMenuItem";
-            this.sqlLiteToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.sqlLiteToolStripMenuItem.Size = new System.Drawing.Size(153, 30);
             this.sqlLiteToolStripMenuItem.Text = "Sql Lite";
             this.sqlLiteToolStripMenuItem.Click += new System.EventHandler(this.sqlLiteToolStripMenuItem_Click);
             // 
             // mySqlToolStripMenuItem
             // 
             this.mySqlToolStripMenuItem.Name = "mySqlToolStripMenuItem";
-            this.mySqlToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.mySqlToolStripMenuItem.Size = new System.Drawing.Size(153, 30);
             this.mySqlToolStripMenuItem.Text = "SQL";
             this.mySqlToolStripMenuItem.Click += new System.EventHandler(this.mySqlToolStripMenuItem_Click);
             // 
@@ -130,6 +131,20 @@
             this.createDatabaseToolStripMenuItem.Size = new System.Drawing.Size(153, 29);
             this.createDatabaseToolStripMenuItem.Text = "Create Database";
             this.createDatabaseToolStripMenuItem.Click += new System.EventHandler(this.createDatabaseToolStripMenuItem_Click);
+            // 
+            // sqliteToolStripMenuItem
+            // 
+            this.sqliteToolStripMenuItem.Name = "sqliteToolStripMenuItem";
+            this.sqliteToolStripMenuItem.Size = new System.Drawing.Size(140, 30);
+            this.sqliteToolStripMenuItem.Text = "Sqlite";
+            this.sqliteToolStripMenuItem.Click += new System.EventHandler(this.sqliteToolStripMenuItem_Click);
+            // 
+            // sQLToolStripMenuItem
+            // 
+            this.sQLToolStripMenuItem.Name = "sQLToolStripMenuItem";
+            this.sQLToolStripMenuItem.Size = new System.Drawing.Size(140, 30);
+            this.sQLToolStripMenuItem.Text = "SQL";
+            this.sQLToolStripMenuItem.Click += new System.EventHandler(this.sQLToolStripMenuItem_Click);
             // 
             // menuStrip2
             // 
@@ -156,7 +171,7 @@
             // lbl_databaseName
             // 
             this.lbl_databaseName.AutoSize = true;
-            this.lbl_databaseName.Location = new System.Drawing.Point(34, 48);
+            this.lbl_databaseName.Location = new System.Drawing.Point(24, 119);
             this.lbl_databaseName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_databaseName.Name = "lbl_databaseName";
             this.lbl_databaseName.Size = new System.Drawing.Size(0, 20);
@@ -165,18 +180,18 @@
             // 
             // dataGridView1
             // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Red;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Red;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.GridColor = System.Drawing.Color.SteelBlue;
-            this.dataGridView1.Location = new System.Drawing.Point(37, 78);
+            this.dataGridView1.Location = new System.Drawing.Point(27, 149);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -186,7 +201,7 @@
             // 
             // btn_getSchema
             // 
-            this.btn_getSchema.Location = new System.Drawing.Point(103, 808);
+            this.btn_getSchema.Location = new System.Drawing.Point(93, 879);
             this.btn_getSchema.Margin = new System.Windows.Forms.Padding(2);
             this.btn_getSchema.Name = "btn_getSchema";
             this.btn_getSchema.Size = new System.Drawing.Size(119, 35);
@@ -195,25 +210,21 @@
             this.btn_getSchema.UseVisualStyleBackColor = true;
             this.btn_getSchema.Click += new System.EventHandler(this.btn_getSchema_Click);
             // 
-            // sqliteToolStripMenuItem
+            // cmb_tableName
             // 
-            this.sqliteToolStripMenuItem.Name = "sqliteToolStripMenuItem";
-            this.sqliteToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
-            this.sqliteToolStripMenuItem.Text = "Sqlite";
-            this.sqliteToolStripMenuItem.Click += new System.EventHandler(this.sqliteToolStripMenuItem_Click);
-            // 
-            // sQLToolStripMenuItem
-            // 
-            this.sQLToolStripMenuItem.Name = "sQLToolStripMenuItem";
-            this.sQLToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
-            this.sQLToolStripMenuItem.Text = "SQL";
-            this.sQLToolStripMenuItem.Click += new System.EventHandler(this.sQLToolStripMenuItem_Click);
+            this.cmb_tableName.FormattingEnabled = true;
+            this.cmb_tableName.Location = new System.Drawing.Point(27, 60);
+            this.cmb_tableName.Name = "cmb_tableName";
+            this.cmb_tableName.Size = new System.Drawing.Size(455, 28);
+            this.cmb_tableName.TabIndex = 12;
+            this.cmb_tableName.SelectedIndexChanged += new System.EventHandler(this.cmb_tableName_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1793, 1254);
+            this.Controls.Add(this.cmb_tableName);
             this.Controls.Add(this.btn_getSchema);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.lbl_databaseName);
@@ -255,6 +266,7 @@
         private System.Windows.Forms.Button btn_getSchema;
         private System.Windows.Forms.ToolStripMenuItem sqliteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sQLToolStripMenuItem;
+        private System.Windows.Forms.ComboBox cmb_tableName;
     }
 }
 

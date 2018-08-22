@@ -68,11 +68,21 @@ namespace OneConnect
 
         public IDataReader executeCommand(string commandString)
         {
-
             IDbCommand cmd = new SQLiteCommand(commandString, connection);
             IDataAdapter da = new SQLiteDataAdapter((SQLiteCommand)cmd);
-            IDataReader reader = cmd.ExecuteReader();
-            return reader;
+            if (commandString.Contains("select"))
+            {
+                
+                IDataReader reader = cmd.ExecuteReader();
+                return reader;
+            }
+            else
+            {
+                cmd.ExecuteNonQuery();
+                return null;
+
+            }
+            
         }
 
         public SQLiteDataReader getReader
@@ -106,6 +116,18 @@ namespace OneConnect
                 }
             }
             return databaseSchema;
+        }
+
+        public List<string> getTableNames()
+        {
+            List<string> _tableName = new List<string>();
+            DataTable table = connection.GetSchema("Tables");
+            foreach(DataRow row in table.Rows)
+            {
+                _tableName.Add((string)row[2]);
+            }
+
+            return _tableName;
         }
 
         public bool createDb(string path)
