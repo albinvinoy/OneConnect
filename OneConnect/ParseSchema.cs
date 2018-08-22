@@ -13,7 +13,6 @@ namespace OneConnect
         
         public void parseSchema(string s)
         {
-            
             var list = s.Split('\r');
             foreach (var item in list)
             {

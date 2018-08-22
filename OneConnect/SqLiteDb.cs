@@ -27,7 +27,6 @@ namespace OneConnect
             {
                 path = string.Format("Data Source={0}", value);
             }
-
             get
             {
                 return path;
@@ -41,7 +40,6 @@ namespace OneConnect
                 return connectionOpen;
             }
         }
-
         public string dbName
         {
             get
@@ -80,9 +78,7 @@ namespace OneConnect
             {
                 cmd.ExecuteNonQuery();
                 return null;
-
             }
-            
         }
 
         public SQLiteDataReader getReader
@@ -139,21 +135,6 @@ namespace OneConnect
         private void createDbHelper(string v)
         {
             SQLiteConnection.CreateFile(v);
-
-            /*
-             string sql = "create table highscores (name varchar(20), score int)";
-
-SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
-command.ExecuteNonQuery();
-
-sql = "insert into highscores (name, score) values ('Me', 9001)";
-
-command = new SQLiteCommand(sql, m_dbConnection);
-command.ExecuteNonQuery();
-
-m_dbConnection.Close();
-
-             */
         }
     }
 }

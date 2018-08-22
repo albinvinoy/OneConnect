@@ -130,7 +130,7 @@ namespace OneConnect
             this.createDatabaseToolStripMenuItem.Name = "createDatabaseToolStripMenuItem";
             this.createDatabaseToolStripMenuItem.Size = new System.Drawing.Size(153, 29);
             this.createDatabaseToolStripMenuItem.Text = "Create Database";
-            this.createDatabaseToolStripMenuItem.Click += new System.EventHandler(this.createDatabaseToolStripMenuItem_Click);
+            this.createDatabaseToolStripMenuItem.Click += new System.EventHandler(this.CreateDatabaseToolStripMenuItem_Click);
             // 
             // sqliteToolStripMenuItem
             // 
