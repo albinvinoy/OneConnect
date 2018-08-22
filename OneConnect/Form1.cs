@@ -32,16 +32,21 @@ namespace OneConnect
         private void btn_Run_Click(object sender, EventArgs e)
         {
             string dbCommand = txt_schema.Text;
-            if (_filepath == string.Empty)
+            if(currentDatabaseType == DatabaseType.Sqlite)
             {
-                _filepath = chooseFile();
+                if (_filepath == string.Empty)
+                {
+                    _filepath = chooseFile();
+                }
+
+                SqLiteDb sqLiteDbConn = new SqLiteDb(_filepath);
+                sqLiteDbConn.openDb();
+                var reader = sqLiteDbConn.executeCommand(dbCommand);
+                fillGridView(reader);
+                sqLiteDbConn.closeDB();
             }
 
-            SqLiteDb sqLiteDbConn = new SqLiteDb(_filepath);
-            sqLiteDbConn.openDb();
-            var reader = sqLiteDbConn.executeCommand(dbCommand);
-            fillGridView(reader);
-            sqLiteDbConn.closeDB();
+            
         }
 
         private void fillGridView(IDataReader reader)
@@ -153,10 +158,10 @@ namespace OneConnect
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             if(folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-                _filepath = folderBrowserDialog.SelectedPath ;
+                _filepath = folderBrowserDialog.SelectedPath + "\\test.db";
             }
             
-            SqLiteDb sq = new SqLiteDb(_filepath+ "\\test.db");
+            SqLiteDb sq = new SqLiteDb(_filepath);
             sq.createDb(_filepath + "\\test.db");
             sq.openDb();
             
