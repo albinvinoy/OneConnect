@@ -68,12 +68,14 @@ namespace OneConnect
             return connectionOpen;
         }
 
-        public IDataReader executeCommand(string commandString)
+        public DataTable executeCommand(string commandString)
         {
             IDbCommand cmd = new SqlCommand(commandString, connection);
             IDataAdapter da = new SqlDataAdapter((SqlCommand)cmd);
             IDataReader reader = cmd.ExecuteReader();
-            return reader;
+            DataTable dreader = new DataTable();
+            dreader.Load(reader);
+            return dreader;
         }
 
         public void closeDB()

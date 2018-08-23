@@ -64,7 +64,7 @@ namespace OneConnect
             return connectionOpen;
         }
 
-        public IDataReader executeCommand(string commandString)
+        public DataTable executeCommand(string commandString)
         {
             IDbCommand cmd = new SQLiteCommand(commandString, connection);
             IDataAdapter da = new SQLiteDataAdapter((SQLiteCommand)cmd);
@@ -72,7 +72,9 @@ namespace OneConnect
             {
                 
                 IDataReader reader = cmd.ExecuteReader();
-                return reader;
+                DataTable dreader = new DataTable();
+                dreader.Load(reader);
+                return dreader;
             }
             else
             {
@@ -101,14 +103,18 @@ namespace OneConnect
         public Dictionary<string, List<string>> getTableData()
         {
             DataTable tables = null;
+            string[] restrictions = new string[4];
             if (connectionOpen)
             {
                 tables = connection.GetSchema("Tables");
+                
                 foreach (DataRow name in tables.Rows)
                 {
+                    restrictions[2] = name.ItemArray[2].ToString();
+                    DataTable table = connection.GetSchema("Columns", restrictions);
                     ParseSchema ps = new ParseSchema();
                     ps.parseSchema((string)name[6]);
-                    databaseSchema.Add((string)name[2], ps.getSchema);
+                    databaseSchema.Add(name.ItemArray[2].ToString(), ps.getSchema);
                 }
             }
             return databaseSchema;

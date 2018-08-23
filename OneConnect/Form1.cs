@@ -49,10 +49,8 @@ namespace OneConnect
             else if(currentDatabaseType == DatabaseType.SQL)
             {
                 Sql connection = new Sql(@"localhost", "tempdb", "sa", "123");
-                if (connection.isConnectionOpen)
-                {
                     connection.openDb();
-                }
+                
                 var reader = connection.executeCommand(dbCommand);
                 fillGridView(reader);
                 connection.closeDB();
@@ -60,9 +58,9 @@ namespace OneConnect
             
         }
 
-        private void fillGridView(IDataReader reader)
+        private void fillGridView(DataTable reader)
         {
-
+            //DataTable dt = new DataTable();
             BindingSource bs = new BindingSource();
             bs.DataSource = reader;
 
