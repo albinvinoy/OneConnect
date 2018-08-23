@@ -13,23 +13,17 @@ namespace OneConnect
 {
     public partial class Form1 : Form
     {
-        private enum DatabaseType {Sqlite, SQL };
+        private enum DatabaseType { Sqlite, SQL };
         private DatabaseType currentDatabaseType;
         private string _filepath = "";
         private static SqlKeyWords words = new SqlKeyWords();
-        private List<string> keywords = Words.reservedWords;
-
-        private DatabaseType CurrentDatabaseType { get => currentDatabaseType; set => currentDatabaseType = value; }
-        public string Filepath { get => _filepath; set => _filepath = value; }
-        internal static SqlKeyWords Words { get => words; set => words = value; }
-        public List<string> Keywords { get => keywords; set => keywords = value; }
-
+        private List<string> keywords = words.reservedWords;
         public Form1()
         {
             InitializeComponent();
-            
+
         }
-        
+
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
 
@@ -38,20 +32,31 @@ namespace OneConnect
         private void btn_Run_Click(object sender, EventArgs e)
         {
             string dbCommand = txt_schema.Text;
-            if(CurrentDatabaseType == DatabaseType.Sqlite)
+
+            if(currentDatabaseType == DatabaseType.Sqlite)
             {
-                if (Filepath == string.Empty)
+                if (_filepath == string.Empty)
                 {
-                    Filepath = chooseFile();
+                    _filepath = chooseFile();
                 }
 
-                SqLiteDb sqLiteDbConn = new SqLiteDb(Filepath);
+                SqLiteDb sqLiteDbConn = new SqLiteDb(_filepath);
                 sqLiteDbConn.openDb();
                 var reader = sqLiteDbConn.executeCommand(dbCommand);
                 fillGridView(reader);
                 sqLiteDbConn.closeDB();
             }
-
+            else if(currentDatabaseType == DatabaseType.SQL)
+            {
+                Sql connection = new Sql(@"localhost", "tempdb", "sa", "123");
+                if (connection.isConnectionOpen)
+                {
+                    connection.openDb();
+                }
+                var reader = connection.executeCommand(dbCommand);
+                fillGridView(reader);
+                connection.closeDB();
+            }
             
         }
 
@@ -61,7 +66,7 @@ namespace OneConnect
             BindingSource bs = new BindingSource();
             bs.DataSource = reader;
 
-            dataGridView1.DataSource = bs;            
+            dataGridView1.DataSource = bs;
         }
 
         private void txt_schema_KeyUp(object sender, KeyEventArgs e)
@@ -78,12 +83,12 @@ namespace OneConnect
         private void sqlLiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //on load for selecting sqlite
-            CurrentDatabaseType = DatabaseType.Sqlite;
+            currentDatabaseType = DatabaseType.Sqlite;
             //if (_filepath == string.Empty)
             //{
-            Filepath = chooseFile();
+            _filepath = chooseFile();
             //}
-            SqLiteDb sqLiteDbConn = new SqLiteDb(Filepath);
+            SqLiteDb sqLiteDbConn = new SqLiteDb(_filepath);
             try
             {
                 //sqLiteDbConn.connectionString = filepath;
@@ -103,7 +108,7 @@ namespace OneConnect
 
         private void txt_schema_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private string chooseFile()
@@ -111,26 +116,30 @@ namespace OneConnect
             OpenFileDialog folderBrowserDialog = new OpenFileDialog();
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-                Filepath = folderBrowserDialog.FileName;
+                _filepath = folderBrowserDialog.FileName;
             }
-            return Filepath;
+            return _filepath;
         }
 
-        private void CreateDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        private void createDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
         private void mySqlToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CurrentDatabaseType = DatabaseType.SQL;
-            Sql sqlDbConn = new Sql(@"DESKTOP-2QVKASI\SQL2012", "AdventureWorksDW2012EE", "sa", "123");
+            currentDatabaseType = DatabaseType.SQL;
+            Sql sqlDbConn = new Sql(@"localhost", "tempdb", "", "");
+            //Server=localhost;Database=master;Trusted_Connection=True;
             try
             {
                 //sqLiteDbConn.connectionString = filepath;
                 bool pass = sqlDbConn.openDb();
                 //lbl_Error.Text = string.Format("*** Connection *** {0}", pass);
                 lbl_databaseName.Text = string.Format("Connected to {0} - {1}", sqlDbConn.dbName, "SQL Database");
+
+                List<string> tableData = sqlDbConn.getTableName();
+                cmb_tableName.DataSource = tableData;
             }
             catch (Exception ex)
             {
@@ -141,39 +150,40 @@ namespace OneConnect
 
         private void btn_getSchema_Click(object sender, EventArgs e)
         {
-            if (DatabaseType.Sqlite == CurrentDatabaseType)
+            if (DatabaseType.Sqlite == currentDatabaseType)
             {
-                if (Filepath == string.Empty)
+                if (_filepath == string.Empty)
                 {
-                    Filepath = chooseFile();
+                    _filepath = chooseFile();
                 }
-                SqLiteDb sqLiteDbConn = new SqLiteDb(Filepath);
+                SqLiteDb sqLiteDbConn = new SqLiteDb(_filepath);
                 sqLiteDbConn.openDb();
                 var tableData = sqLiteDbConn.getTableData();
                 sqLiteDbConn.closeDB();
             }
-            else if(DatabaseType.SQL == CurrentDatabaseType)
+            else if (DatabaseType.SQL == currentDatabaseType)
             {
-                Sql sqlDbConn = new Sql(@"DESKTOP-2QVKASI\SQL2012", "AdventureWorksDW2012EE", "sa", "123");
+                Sql sqlDbConn = new Sql(@"localhost", "tempdb", "sa", "123");
                 sqlDbConn.openDb();
                 var tableData = sqlDbConn.getTableData();
                 sqlDbConn.closeDB();
 
             }
         }
+
         private void sqliteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CurrentDatabaseType = DatabaseType.Sqlite;
+            currentDatabaseType = DatabaseType.Sqlite;
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            if(folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-                Filepath = folderBrowserDialog.SelectedPath + "\\test.db";
+                _filepath = folderBrowserDialog.SelectedPath;
             }
-            
-            SqLiteDb sq = new SqLiteDb(Filepath);
-            sq.createDb(Filepath + "\\test.db");
+
+            SqLiteDb sq = new SqLiteDb(_filepath + "\\test.db");
+            sq.createDb(_filepath + "\\test.db");
             sq.openDb();
-            
+
             Console.WriteLine(sq.connectionString);
             Console.WriteLine(sq.isConnectionOpen);
             sq.closeDB();
@@ -184,25 +194,49 @@ namespace OneConnect
             // https://support.microsoft.com/en-us/help/307283/how-to-create-a-sql-server-database-programmatically-by-using-ado-net
         }
 
-        private void fillSchema(string tableName)
+        private void fillTableWithData(string tableName)
         {
             string selectProcedure = string.Format("select * from {0};", tableName);
-            if (Filepath == string.Empty)
+            if (currentDatabaseType == DatabaseType.Sqlite)
             {
-                Filepath = chooseFile();
-            }
+                
+                if (_filepath == string.Empty)
+                {
+                    _filepath = chooseFile();
+                }
 
-            SqLiteDb sqLiteDbConn = new SqLiteDb(Filepath);
-            sqLiteDbConn.openDb();
-            var reader = sqLiteDbConn.executeCommand(selectProcedure);
-            fillGridView(reader);
-            sqLiteDbConn.closeDB();
+                SqLiteDb sqLiteDbConn = new SqLiteDb(_filepath);
+                sqLiteDbConn.openDb();
+                var reader = sqLiteDbConn.executeCommand(selectProcedure);
+                fillGridView(reader);
+                sqLiteDbConn.closeDB();
+
+            }
+            else if(currentDatabaseType == DatabaseType.SQL)
+            {
+                
+                Sql sqlDbConn = new Sql(@"localhost", "tempdb", "sa", "123");
+                sqlDbConn.openDb();
+                var reader = sqlDbConn.executeCommand(selectProcedure);
+                fillGridView(reader);
+                sqlDbConn.closeDB();
+            }
+            
         }
 
         private void cmb_tableName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string tableName = (string)cmb_tableName.SelectedValue;
-            fillSchema(tableName);
+            if(currentDatabaseType == DatabaseType.Sqlite)
+            {
+                string tableName = (string)cmb_tableName.SelectedValue;
+                fillTableWithData(tableName);
+            }
+            else if(currentDatabaseType == DatabaseType.SQL)
+            {
+                string tableName = (string)cmb_tableName.SelectedValue;
+                fillTableWithData(tableName);
+            }
+
         }
 
     }

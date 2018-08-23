@@ -24,7 +24,9 @@ namespace OneConnect
 
         public void connectionString(string s, string i, string u, string p)
         {
-            path = String.Format("Data Source={0};Initial Catalog={1};Persist Security Info=True;User ID={2};Password={3};",s,i,u,p );
+            //path = String.Format("Data Source={0};Initial Catalog={1};Persist Security Info=True;User ID={2};Password={3};",s,i,u,p );
+            path = "Server = localhost; Database = tempdb; Trusted_Connection = True;";
+            //Server = localhost; Database = master; Trusted_Connection = True;
         }
         public string connectionString()
         {
@@ -108,6 +110,19 @@ namespace OneConnect
         private void createDbHelper(string connectionString)
         {
             
+        }
+
+        public List<string> getTableName()
+        {
+            List<string> TableName = new List<string>();
+
+            DataTable table = connection.GetSchema("Tables");
+            foreach (DataRow row in table.Rows)
+            {
+                TableName.Add((string)row[2]);
+            }
+
+            return TableName;            
         }
     }
 }
